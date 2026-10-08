@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inmuebles</title>
+</head>
+
+<body>
+
+    <main>
+
+        <!-- ===================================================== -->
+        <!-- LOGIN Y REGISTRO                                      -->
+        <!-- ===================================================== -->
+
+        <section id="login-view" data-view="login" hidden>
+
+            <h1>Gestión de Inmuebles</h1>
+
+            <form id="login-form">
+
+                <div class="form-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required autocomplete="username">
+                </div>
+
+                <div class="form-field">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" required autocomplete="current-password">
+                </div>
+
+                <button type="submit">
+                    Iniciar sesión
+                </button>
+
+                <p id="login-message" class="form-message"></p>
+
+            </form>
+
+            <button id="go-to-register-btn" type="button" class="link-button">
+                ¿No tienes cuenta? Crear una
+            </button>
+
+        </section>
+
+        <section id="register-view" data-view="register" hidden>
+
+            <button id="back-to-login-btn" type="button" class="link-button">
+                ← Volver a iniciar sesión
+            </button>
+
+            <h1>Crear cuenta</h1>
+
+            <form id="register-form">
+
+                <div class="form-field">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required autocomplete="username">
+                </div>
+
+                <div class="form-field">
+                    <label for="register-password">Contraseña</label>
+                    <input type="password" id="register-password" required autocomplete="new-password" minlength="6">
+                </div>
+
+                <div class="form-field">
+                    <label for="register-password-repeat">Repetir contraseña</label>
+                    <input type="password" id="register-password-repeat" required autocomplete="new-password" minlength="6">
+                </div>
+
+                <button type="submit">
+                    Crear cuenta
+                </button>
+
+                <p id="register-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- MIS INMUEBLES                                         -->
+        <!-- ===================================================== -->
+
+        <section id="properties-view" data-view="properties" hidden>
+
+            <h1>Gestión de Inmuebles</h1>
+
+            <h2>Mis inmuebles</h2>
+
+            <div id="properties-list"></div>
+
+            <button id="add-property-btn" type="button">
+                + Añadir inmueble
+            </button>
+
+            <button id="contactos-btn" type="button">
+                Contactos
+            </button>
+
+            <button id="alertas-btn" type="button">
+                Alertas
+            </button>
+
+            <button id="logout-btn" type="button">
+                Cerrar sesión
+            </button>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- FICHA DE INMUEBLE                                     -->
+        <!-- ===================================================== -->
+
+        <section id="property-view" data-view="property" hidden>
+
+            <button id="back-to-properties-btn" type="button" class="link-button">
+                ← Volver a Mis inmuebles
+            </button>
+
+            <h2 id="property-title"></h2>
+
+            <div id="property-details"></div>
+
+            <button id="edit-property-btn" type="button">
+                Editar
+            </button>
+
+            <button id="compartir-btn" type="button" hidden>
+                Compartir inmueble
+            </button>
+
+            <h2 class="section-heading">Partes del inmueble</h2>
+
+            <div id="partes-list"></div>
+
+            <button id="add-parte-btn" type="button" hidden>
+                + Añadir parte
+            </button>
+
+            <h2 class="section-heading">Gastos</h2>
+
+            <div id="gastos-list"></div>
+
+            <button id="add-gasto-btn" type="button" hidden>
+                + Añadir gasto
+            </button>
+
+            <h2 class="section-heading">Incidencias</h2>
+
+            <div id="incidencias-list"></div>
+
+            <button id="add-incidencia-btn" type="button" hidden>
+                + Añadir incidencia
+            </button>
+
+            <h2 class="section-heading">Bitácora</h2>
+
+            <div id="bitacora-list"></div>
+
+            <button id="add-bitacora-btn" type="button" hidden>
+                + Añadir entrada
+            </button>
+
+            <h2 class="section-heading">Seguros</h2>
+
+            <div id="seguros-list"></div>
+
+            <button id="add-seguro-btn" type="button" hidden>
+                + Añadir seguro
+            </button>
+
+            <h2 class="section-heading">Hipotecas</h2>
+
+            <div id="hipotecas-list"></div>
+
+            <button id="add-hipoteca-btn" type="button" hidden>
+                + Añadir hipoteca
+            </button>
+
+            <h2 class="section-heading">Contratos de alquiler</h2>
+
+            <div id="contratos-list"></div>
+
+            <button id="add-contrato-btn" type="button" hidden>
+                + Añadir contrato
+            </button>
+
+            <h2 class="section-heading">Propietarios</h2>
+
+            <div id="propietarios-list"></div>
+
+            <button id="add-propietario-btn" type="button" hidden>
+                + Añadir propietario
+            </button>
+
+            <h2 class="section-heading">Gastos recurrentes</h2>
+
+            <div id="recurrentes-list"></div>
+
+            <button id="add-recurrente-btn" type="button" hidden>
+                + Añadir gasto recurrente
+            </button>
+
+            <h2 class="section-heading">Compras</h2>
+
+            <div id="compras-list"></div>
+
+            <button id="add-compra-btn" type="button" hidden>
+                + Añadir compra
+            </button>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- EDITAR / AÑADIR INMUEBLE                              -->
+        <!-- ===================================================== -->
+
+        <section id="edit-property-view" data-view="edit-property" hidden>
+
+            <button id="edit-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar inmueble</h2>
+
+            <form id="edit-property-form">
+
+                <div class="form-field">
+                    <label for="edit-nombre">Nombre</label>
+                    <input type="text" id="edit-nombre" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-tipo">Tipo</label>
+                    <select id="edit-tipo" required>
+                        <option value="Piso">Piso</option>
+                        <option value="Casa">Casa</option>
+                        <option value="Chalet">Chalet</option>
+                        <option value="Apartamento">Apartamento</option>
+                        <option value="Local">Local</option>
+                        <option value="Garaje">Garaje</option>
+                        <option value="Trastero">Trastero</option>
+                        <option value="Oficina">Oficina</option>
+                        <option value="Nave">Nave</option>
+                        <option value="Solar">Solar</option>
+                        <option value="Terreno">Terreno</option>
+                        <option value="Finca">Finca</option>
+                        <option value="Parcela">Parcela</option>
+                        <option value="Corral">Corral</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-direccion">Dirección</label>
+                    <input type="text" id="edit-direccion">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-numero">Número</label>
+                        <input type="text" id="edit-numero">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-piso">Piso</label>
+                        <input type="text" id="edit-piso">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-puerta">Puerta</label>
+                        <input type="text" id="edit-puerta">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-codigo-postal">Código postal</label>
+                        <input type="text" id="edit-codigo-postal">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-localidad">Localidad</label>
+                        <input type="text" id="edit-localidad">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-provincia">Provincia</label>
+                    <input type="text" id="edit-provincia">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-superficie">Superficie (m²)</label>
+                        <input type="number" id="edit-superficie" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-habitaciones">Habitaciones</label>
+                        <input type="number" id="edit-habitaciones" step="1" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-banos">Baños</label>
+                        <input type="number" id="edit-banos" step="1" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-fecha-adquisicion">Fecha de adquisición</label>
+                    <input type="date" id="edit-fecha-adquisicion">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-valor-adquisicion">Valor de adquisición (€)</label>
+                        <input type="number" id="edit-valor-adquisicion" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-valor-actual">Valor actual (€)</label>
+                        <input type="number" id="edit-valor-actual" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-observaciones">Observaciones</label>
+                    <textarea id="edit-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-property-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="add-property-view" data-view="add-property" hidden>
+
+            <button id="add-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir inmueble</h2>
+
+            <form id="add-property-form">
+
+                <div class="form-field">
+                    <label for="add-nombre">Nombre</label>
+                    <input type="text" id="add-nombre" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="add-tipo">Tipo</label>
+                    <select id="add-tipo" required>
+                        <option value="Piso">Piso</option>
+                        <option value="Casa">Casa</option>
+                        <option value="Chalet">Chalet</option>
+                        <option value="Apartamento">Apartamento</option>
+                        <option value="Local">Local</option>
+                        <option value="Garaje">Garaje</option>
+                        <option value="Trastero">Trastero</option>
+                        <option value="Oficina">Oficina</option>
+                        <option value="Nave">Nave</option>
+                        <option value="Solar">Solar</option>
+                        <option value="Terreno">Terreno</option>
+                        <option value="Finca">Finca</option>
+                        <option value="Parcela">Parcela</option>
+                        <option value="Corral">Corral</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="add-direccion">Dirección</label>
+                    <input type="text" id="add-direccion">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="add-numero">Número</label>
+                        <input type="text" id="add-numero">
+                    </div>
+                    <div class="form-field">
+                        <label for="add-piso">Piso</label>
+                        <input type="text" id="add-piso">
+                    </div>
+                    <div class="form-field">
+                        <label for="add-puerta">Puerta</label>
+                        <input type="text" id="add-puerta">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="add-codigo-postal">Código postal</label>
+                        <input type="text" id="add-codigo-postal">
+                    </div>
+                    <div class="form-field">
+                        <label for="add-localidad">Localidad</label>
+                        <input type="text" id="add-localidad">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="add-provincia">Provincia</label>
+                    <input type="text" id="add-provincia">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="add-superficie">Superficie (m²)</label>
+                        <input type="number" id="add-superficie" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="add-habitaciones">Habitaciones</label>
+                        <input type="number" id="add-habitaciones" step="1" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="add-banos">Baños</label>
+                        <input type="number" id="add-banos" step="1" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="add-fecha-adquisicion">Fecha de adquisición</label>
+                    <input type="date" id="add-fecha-adquisicion">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="add-valor-adquisicion">Valor de adquisición (€)</label>
+                        <input type="number" id="add-valor-adquisicion" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="add-valor-actual">Valor actual (€)</label>
+                        <input type="number" id="add-valor-actual" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="add-observaciones">Observaciones</label>
+                    <textarea id="add-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Crear inmueble
+                </button>
+
+                <p id="add-property-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- COMPARTIR INMUEBLE                                    -->
+        <!-- ===================================================== -->
+
+        <section id="compartir-view" data-view="compartir" hidden>
+
+            <button id="back-to-ficha-from-compartir-btn" type="button" class="link-button">
+                ← Volver a la ficha
+            </button>
+
+            <h2 id="compartir-title">Compartir inmueble</h2>
+
+            <h2 class="section-heading">Con acceso</h2>
+
+            <div id="colaboradores-list"></div>
+
+            <h2 class="section-heading">Invitaciones pendientes</h2>
+
+            <div id="invitaciones-list"></div>
+
+            <h2 class="section-heading">Invitar a alguien</h2>
+
+            <form id="invitar-form">
+
+                <div class="form-field">
+                    <label for="invitar-email">Email</label>
+                    <input type="email" id="invitar-email" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="invitar-rol">Rol</label>
+                        <select id="invitar-rol" required>
+                            <option value="Propietario">Propietario</option>
+                            <option value="Arrendador">Arrendador</option>
+                            <option value="Inquilino">Inquilino</option>
+                            <option value="Familiar" selected>Familiar</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="invitar-permiso">Permiso</label>
+                        <select id="invitar-permiso" required>
+                            <option value="Lectura" selected>Lectura</option>
+                            <option value="Edición">Edición</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit">
+                    Enviar invitación
+                </button>
+
+                <p id="invitar-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- PARTES                                                -->
+        <!-- ===================================================== -->
+
+        <section id="add-parte-view" data-view="add-parte" hidden>
+
+            <button id="add-parte-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir parte</h2>
+
+            <form id="add-parte-form">
+
+                <div class="form-field">
+                    <label for="parte-nombre">Nombre</label>
+                    <input type="text" id="parte-nombre" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="parte-tipo">Tipo</label>
+                    <select id="parte-tipo" required>
+                        <option value="Estancia">Estancia</option>
+                        <option value="Elemento">Elemento</option>
+                        <option value="Zona">Zona</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="parte-observaciones">Observaciones</label>
+                    <textarea id="parte-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar parte
+                </button>
+
+                <p id="add-parte-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-parte-view" data-view="edit-parte" hidden>
+
+            <button id="edit-parte-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar parte</h2>
+
+            <form id="edit-parte-form">
+
+                <div class="form-field">
+                    <label for="edit-parte-nombre">Nombre</label>
+                    <input type="text" id="edit-parte-nombre" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-parte-tipo">Tipo</label>
+                    <select id="edit-parte-tipo" required>
+                        <option value="Estancia">Estancia</option>
+                        <option value="Elemento">Elemento</option>
+                        <option value="Zona">Zona</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-parte-observaciones">Observaciones</label>
+                    <textarea id="edit-parte-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-parte-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- GASTOS                                                -->
+        <!-- ===================================================== -->
+
+        <section id="add-gasto-view" data-view="add-gasto" hidden>
+
+            <button id="add-gasto-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir gasto</h2>
+
+            <form id="add-gasto-form">
+
+                <div class="form-field">
+                    <label for="gasto-fecha">Fecha</label>
+                    <input type="date" id="gasto-fecha" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="gasto-tipo">Tipo</label>
+                    <select id="gasto-tipo" required>
+                        <option value="IBI">IBI</option>
+                        <option value="Comunidad">Comunidad</option>
+                        <option value="Derrama">Derrama</option>
+                        <option value="Reparación">Reparación</option>
+                        <option value="Mantenimiento">Mantenimiento</option>
+                        <option value="Impuesto">Impuesto</option>
+                        <option value="Suministro">Suministro</option>
+                        <option value="Servicio">Servicio</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="gasto-descripcion">Descripción</label>
+                    <input type="text" id="gasto-descripcion" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="gasto-importe">Importe (€)</label>
+                    <input type="number" id="gasto-importe" step="0.01" min="0" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="gasto-observaciones">Observaciones</label>
+                    <textarea id="gasto-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar gasto
+                </button>
+
+                <p id="add-gasto-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-gasto-view" data-view="edit-gasto" hidden>
+
+            <button id="edit-gasto-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar gasto</h2>
+
+            <form id="edit-gasto-form">
+
+                <div class="form-field">
+                    <label for="edit-gasto-fecha">Fecha</label>
+                    <input type="date" id="edit-gasto-fecha" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-gasto-tipo">Tipo</label>
+                    <select id="edit-gasto-tipo" required>
+                        <option value="IBI">IBI</option>
+                        <option value="Comunidad">Comunidad</option>
+                        <option value="Derrama">Derrama</option>
+                        <option value="Reparación">Reparación</option>
+                        <option value="Mantenimiento">Mantenimiento</option>
+                        <option value="Impuesto">Impuesto</option>
+                        <option value="Suministro">Suministro</option>
+                        <option value="Servicio">Servicio</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-gasto-descripcion">Descripción</label>
+                    <input type="text" id="edit-gasto-descripcion" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-gasto-importe">Importe (€)</label>
+                    <input type="number" id="edit-gasto-importe" step="0.01" min="0" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-gasto-observaciones">Observaciones</label>
+                    <textarea id="edit-gasto-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-gasto-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- INCIDENCIAS                                           -->
+        <!-- ===================================================== -->
+
+        <section id="add-incidencia-view" data-view="add-incidencia" hidden>
+
+            <button id="add-incidencia-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir incidencia</h2>
+
+            <form id="add-incidencia-form">
+
+                <div class="form-field">
+                    <label for="incidencia-titulo">Título</label>
+                    <input type="text" id="incidencia-titulo" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="incidencia-descripcion">Descripción</label>
+                    <textarea id="incidencia-descripcion" rows="3" required></textarea>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="incidencia-tipo">Tipo</label>
+                        <select id="incidencia-tipo" required>
+                            <option value="Avería">Avería</option>
+                            <option value="Daño">Daño</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="incidencia-prioridad">Prioridad</label>
+                        <select id="incidencia-prioridad" required>
+                            <option value="Baja">Baja</option>
+                            <option value="Media" selected>Media</option>
+                            <option value="Alta">Alta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="incidencia-estado">Estado</label>
+                        <select id="incidencia-estado" required>
+                            <option value="Abierta" selected>Abierta</option>
+                            <option value="En curso">En curso</option>
+                            <option value="Resuelta">Resuelta</option>
+                            <option value="Cerrada">Cerrada</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="incidencia-parte">Parte relacionada</label>
+                        <select id="incidencia-parte">
+                            <option value="">Sin parte asociada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="incidencia-fecha-apertura">Fecha de apertura</label>
+                        <input type="date" id="incidencia-fecha-apertura" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="incidencia-fecha-resolucion">Fecha de resolución</label>
+                        <input type="date" id="incidencia-fecha-resolucion">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="incidencia-importe-estimado">Importe estimado (€)</label>
+                        <input type="number" id="incidencia-importe-estimado" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="incidencia-importe-final">Importe final (€)</label>
+                        <input type="number" id="incidencia-importe-final" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="incidencia-observaciones">Observaciones</label>
+                    <textarea id="incidencia-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar incidencia
+                </button>
+
+                <p id="add-incidencia-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-incidencia-view" data-view="edit-incidencia" hidden>
+
+            <button id="edit-incidencia-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar incidencia</h2>
+
+            <form id="edit-incidencia-form">
+
+                <div class="form-field">
+                    <label for="edit-incidencia-titulo">Título</label>
+                    <input type="text" id="edit-incidencia-titulo" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-incidencia-descripcion">Descripción</label>
+                    <textarea id="edit-incidencia-descripcion" rows="3" required></textarea>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-incidencia-tipo">Tipo</label>
+                        <select id="edit-incidencia-tipo" required>
+                            <option value="Avería">Avería</option>
+                            <option value="Daño">Daño</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-incidencia-prioridad">Prioridad</label>
+                        <select id="edit-incidencia-prioridad" required>
+                            <option value="Baja">Baja</option>
+                            <option value="Media">Media</option>
+                            <option value="Alta">Alta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-incidencia-estado">Estado</label>
+                        <select id="edit-incidencia-estado" required>
+                            <option value="Abierta">Abierta</option>
+                            <option value="En curso">En curso</option>
+                            <option value="Resuelta">Resuelta</option>
+                            <option value="Cerrada">Cerrada</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-incidencia-parte">Parte relacionada</label>
+                        <select id="edit-incidencia-parte">
+                            <option value="">Sin parte asociada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-incidencia-fecha-apertura">Fecha de apertura</label>
+                        <input type="date" id="edit-incidencia-fecha-apertura" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-incidencia-fecha-resolucion">Fecha de resolución</label>
+                        <input type="date" id="edit-incidencia-fecha-resolucion">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-incidencia-importe-estimado">Importe estimado (€)</label>
+                        <input type="number" id="edit-incidencia-importe-estimado" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-incidencia-importe-final">Importe final (€)</label>
+                        <input type="number" id="edit-incidencia-importe-final" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-incidencia-observaciones">Observaciones</label>
+                    <textarea id="edit-incidencia-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-incidencia-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- ACTUACIONES (hijas de Incidencias)                    -->
+        <!-- ===================================================== -->
+
+        <section id="actuaciones-view" data-view="actuaciones" hidden>
+
+            <button id="back-to-ficha-from-actuaciones-btn" type="button" class="link-button">
+                ← Volver a la ficha
+            </button>
+
+            <h2 id="actuaciones-title">Actuaciones</h2>
+
+            <div id="actuaciones-list"></div>
+
+            <button id="add-actuacion-btn" type="button" hidden>
+                + Añadir actuación
+            </button>
+
+        </section>
+
+        <section id="add-actuacion-view" data-view="add-actuacion" hidden>
+
+            <button id="add-actuacion-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir actuación</h2>
+
+            <form id="add-actuacion-form">
+
+                <div class="form-field">
+                    <label for="actuacion-fecha">Fecha</label>
+                    <input type="date" id="actuacion-fecha" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="actuacion-descripcion">Descripción</label>
+                    <textarea id="actuacion-descripcion" rows="3" required></textarea>
+                </div>
+
+                <div class="form-field">
+                    <label for="actuacion-contacto">Contacto relacionado</label>
+                    <select id="actuacion-contacto">
+                        <option value="">Sin contacto asociado</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="actuacion-observaciones">Observaciones</label>
+                    <textarea id="actuacion-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar actuación
+                </button>
+
+                <p id="add-actuacion-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-actuacion-view" data-view="edit-actuacion" hidden>
+
+            <button id="edit-actuacion-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar actuación</h2>
+
+            <form id="edit-actuacion-form">
+
+                <div class="form-field">
+                    <label for="edit-actuacion-fecha">Fecha</label>
+                    <input type="date" id="edit-actuacion-fecha" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-actuacion-descripcion">Descripción</label>
+                    <textarea id="edit-actuacion-descripcion" rows="3" required></textarea>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-actuacion-contacto">Contacto relacionado</label>
+                    <select id="edit-actuacion-contacto">
+                        <option value="">Sin contacto asociado</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-actuacion-observaciones">Observaciones</label>
+                    <textarea id="edit-actuacion-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-actuacion-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- BITÁCORA                                              -->
+        <!-- ===================================================== -->
+
+        <section id="add-bitacora-view" data-view="add-bitacora" hidden>
+
+            <button id="add-bitacora-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir entrada de bitácora</h2>
+
+            <form id="add-bitacora-form">
+
+                <div class="form-field">
+                    <label for="bitacora-titulo">Título</label>
+                    <input type="text" id="bitacora-titulo" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="bitacora-descripcion">Descripción</label>
+                    <textarea id="bitacora-descripcion" rows="3" required></textarea>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="bitacora-tipo">Tipo</label>
+                        <select id="bitacora-tipo" required>
+                            <option value="Informativa">Informativa</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                            <option value="Mejora">Mejora</option>
+                            <option value="Reforma">Reforma</option>
+                            <option value="Legal/administrativa">Legal/administrativa</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="bitacora-fecha">Fecha</label>
+                        <input type="date" id="bitacora-fecha" required>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="bitacora-parte">Parte relacionada</label>
+                        <select id="bitacora-parte">
+                            <option value="">Sin parte asociada</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="bitacora-contacto">Contacto relacionado</label>
+                        <select id="bitacora-contacto">
+                            <option value="">Sin contacto asociado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="bitacora-observaciones">Observaciones</label>
+                    <textarea id="bitacora-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar entrada
+                </button>
+
+                <p id="add-bitacora-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-bitacora-view" data-view="edit-bitacora" hidden>
+
+            <button id="edit-bitacora-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar entrada de bitácora</h2>
+
+            <form id="edit-bitacora-form">
+
+                <div class="form-field">
+                    <label for="edit-bitacora-titulo">Título</label>
+                    <input type="text" id="edit-bitacora-titulo" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-bitacora-descripcion">Descripción</label>
+                    <textarea id="edit-bitacora-descripcion" rows="3" required></textarea>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-bitacora-tipo">Tipo</label>
+                        <select id="edit-bitacora-tipo" required>
+                            <option value="Informativa">Informativa</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                            <option value="Mejora">Mejora</option>
+                            <option value="Reforma">Reforma</option>
+                            <option value="Legal/administrativa">Legal/administrativa</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-bitacora-fecha">Fecha</label>
+                        <input type="date" id="edit-bitacora-fecha" required>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-bitacora-parte">Parte relacionada</label>
+                        <select id="edit-bitacora-parte">
+                            <option value="">Sin parte asociada</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-bitacora-contacto">Contacto relacionado</label>
+                        <select id="edit-bitacora-contacto">
+                            <option value="">Sin contacto asociado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-bitacora-observaciones">Observaciones</label>
+                    <textarea id="edit-bitacora-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-bitacora-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- SEGUROS                                               -->
+        <!-- ===================================================== -->
+
+        <section id="add-seguro-view" data-view="add-seguro" hidden>
+
+            <button id="add-seguro-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir seguro</h2>
+
+            <form id="add-seguro-form">
+
+                <div class="form-field">
+                    <label for="seguro-aseguradora">Aseguradora</label>
+                    <input type="text" id="seguro-aseguradora" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="seguro-tipo">Tipo</label>
+                        <select id="seguro-tipo" required>
+                            <option value="Hogar">Hogar</option>
+                            <option value="Vida">Vida</option>
+                            <option value="Impago">Impago</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="seguro-numero-poliza">Número de póliza</label>
+                        <input type="text" id="seguro-numero-poliza">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="seguro-fecha-inicio">Fecha de inicio</label>
+                        <input type="date" id="seguro-fecha-inicio">
+                    </div>
+                    <div class="form-field">
+                        <label for="seguro-fecha-vencimiento">Fecha de vencimiento</label>
+                        <input type="date" id="seguro-fecha-vencimiento" required>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="seguro-importe-anual">Importe anual (€)</label>
+                        <input type="number" id="seguro-importe-anual" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="seguro-contacto">Contacto relacionado</label>
+                        <select id="seguro-contacto">
+                            <option value="">Sin contacto asociado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="seguro-observaciones">Observaciones</label>
+                    <textarea id="seguro-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar seguro
+                </button>
+
+                <p id="add-seguro-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-seguro-view" data-view="edit-seguro" hidden>
+
+            <button id="edit-seguro-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar seguro</h2>
+
+            <form id="edit-seguro-form">
+
+                <div class="form-field">
+                    <label for="edit-seguro-aseguradora">Aseguradora</label>
+                    <input type="text" id="edit-seguro-aseguradora" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-seguro-tipo">Tipo</label>
+                        <select id="edit-seguro-tipo" required>
+                            <option value="Hogar">Hogar</option>
+                            <option value="Vida">Vida</option>
+                            <option value="Impago">Impago</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-seguro-numero-poliza">Número de póliza</label>
+                        <input type="text" id="edit-seguro-numero-poliza">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-seguro-fecha-inicio">Fecha de inicio</label>
+                        <input type="date" id="edit-seguro-fecha-inicio">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-seguro-fecha-vencimiento">Fecha de vencimiento</label>
+                        <input type="date" id="edit-seguro-fecha-vencimiento" required>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-seguro-importe-anual">Importe anual (€)</label>
+                        <input type="number" id="edit-seguro-importe-anual" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-seguro-contacto">Contacto relacionado</label>
+                        <select id="edit-seguro-contacto">
+                            <option value="">Sin contacto asociado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-seguro-observaciones">Observaciones</label>
+                    <textarea id="edit-seguro-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-seguro-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- HIPOTECAS                                             -->
+        <!-- ===================================================== -->
+
+        <section id="add-hipoteca-view" data-view="add-hipoteca" hidden>
+
+            <button id="add-hipoteca-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir hipoteca</h2>
+
+            <form id="add-hipoteca-form">
+
+                <div class="form-field">
+                    <label for="hipoteca-entidad">Entidad</label>
+                    <input type="text" id="hipoteca-entidad" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="hipoteca-numero-hipoteca">Número de hipoteca</label>
+                        <input type="text" id="hipoteca-numero-hipoteca">
+                    </div>
+                    <div class="form-field">
+                        <label for="hipoteca-tipo-interes">Tipo de interés</label>
+                        <select id="hipoteca-tipo-interes" required>
+                            <option value="Fijo">Fijo</option>
+                            <option value="Variable">Variable</option>
+                            <option value="Mixto">Mixto</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="hipoteca-fecha-inicio">Fecha de inicio</label>
+                        <input type="date" id="hipoteca-fecha-inicio" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="hipoteca-fecha-fin">Fecha de fin</label>
+                        <input type="date" id="hipoteca-fecha-fin">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="hipoteca-importe-inicial">Importe inicial (€)</label>
+                        <input type="number" id="hipoteca-importe-inicial" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="hipoteca-capital-pendiente">Capital pendiente (€)</label>
+                        <input type="number" id="hipoteca-capital-pendiente" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="hipoteca-cuota-actual">Cuota actual (€/mes)</label>
+                        <input type="number" id="hipoteca-cuota-actual" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="hipoteca-interes">Interés (%)</label>
+                        <input type="number" id="hipoteca-interes" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="hipoteca-observaciones">Observaciones</label>
+                    <textarea id="hipoteca-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar hipoteca
+                </button>
+
+                <p id="add-hipoteca-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-hipoteca-view" data-view="edit-hipoteca" hidden>
+
+            <button id="edit-hipoteca-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar hipoteca</h2>
+
+            <form id="edit-hipoteca-form">
+
+                <div class="form-field">
+                    <label for="edit-hipoteca-entidad">Entidad</label>
+                    <input type="text" id="edit-hipoteca-entidad" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-hipoteca-numero-hipoteca">Número de hipoteca</label>
+                        <input type="text" id="edit-hipoteca-numero-hipoteca">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-hipoteca-tipo-interes">Tipo de interés</label>
+                        <select id="edit-hipoteca-tipo-interes" required>
+                            <option value="Fijo">Fijo</option>
+                            <option value="Variable">Variable</option>
+                            <option value="Mixto">Mixto</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-hipoteca-fecha-inicio">Fecha de inicio</label>
+                        <input type="date" id="edit-hipoteca-fecha-inicio" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-hipoteca-fecha-fin">Fecha de fin</label>
+                        <input type="date" id="edit-hipoteca-fecha-fin">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-hipoteca-importe-inicial">Importe inicial (€)</label>
+                        <input type="number" id="edit-hipoteca-importe-inicial" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-hipoteca-capital-pendiente">Capital pendiente (€)</label>
+                        <input type="number" id="edit-hipoteca-capital-pendiente" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-hipoteca-cuota-actual">Cuota actual (€/mes)</label>
+                        <input type="number" id="edit-hipoteca-cuota-actual" step="0.01" min="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-hipoteca-interes">Interés (%)</label>
+                        <input type="number" id="edit-hipoteca-interes" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-hipoteca-observaciones">Observaciones</label>
+                    <textarea id="edit-hipoteca-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-hipoteca-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- CONTRATOS DE ALQUILER                                 -->
+        <!-- ===================================================== -->
+
+        <section id="add-contrato-view" data-view="add-contrato" hidden>
+
+            <button id="add-contrato-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir contrato de alquiler</h2>
+
+            <form id="add-contrato-form">
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="contrato-tipo">Tipo</label>
+                        <select id="contrato-tipo" required>
+                            <option value="Vivienda">Vivienda</option>
+                            <option value="Local">Local</option>
+                            <option value="Garaje">Garaje</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="contrato-estado">Estado</label>
+                        <select id="contrato-estado" required>
+                            <option value="Borrador" selected>Borrador</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Finalizado">Finalizado</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="contrato-fecha-inicio">Fecha de inicio</label>
+                        <input type="date" id="contrato-fecha-inicio" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="contrato-fecha-fin">Fecha de fin</label>
+                        <input type="date" id="contrato-fecha-fin">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="contrato-importe-mensual">Importe mensual (€)</label>
+                        <input type="number" id="contrato-importe-mensual" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="contrato-fianza">Fianza (€)</label>
+                        <input type="number" id="contrato-fianza" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="contrato-dia-pago">Día de pago</label>
+                        <input type="number" id="contrato-dia-pago" step="1" min="1" max="31">
+                    </div>
+                    <div class="form-field">
+                        <label for="contrato-actualizacion">Actualización</label>
+                        <input type="text" id="contrato-actualizacion" placeholder="Ej. IPC anual">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="contrato-importe-actualizado">Importe actualizado (€)</label>
+                    <input type="number" id="contrato-importe-actualizado" step="0.01" min="0">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="contrato-nombre-arrendatario">Nombre del arrendatario</label>
+                        <input type="text" id="contrato-nombre-arrendatario">
+                    </div>
+                    <div class="form-field">
+                        <label for="contrato-apellidos-arrendatario">Apellidos del arrendatario</label>
+                        <input type="text" id="contrato-apellidos-arrendatario">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="contrato-telefono-arrendatario">Teléfono del arrendatario</label>
+                        <input type="tel" id="contrato-telefono-arrendatario">
+                    </div>
+                    <div class="form-field">
+                        <label for="contrato-email-arrendatario">Email del arrendatario</label>
+                        <input type="email" id="contrato-email-arrendatario">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="contrato-observaciones">Observaciones</label>
+                    <textarea id="contrato-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar contrato
+                </button>
+
+                <p id="add-contrato-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-contrato-view" data-view="edit-contrato" hidden>
+
+            <button id="edit-contrato-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar contrato de alquiler</h2>
+
+            <form id="edit-contrato-form">
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-contrato-tipo">Tipo</label>
+                        <select id="edit-contrato-tipo" required>
+                            <option value="Vivienda">Vivienda</option>
+                            <option value="Local">Local</option>
+                            <option value="Garaje">Garaje</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-contrato-estado">Estado</label>
+                        <select id="edit-contrato-estado" required>
+                            <option value="Borrador">Borrador</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Finalizado">Finalizado</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-contrato-fecha-inicio">Fecha de inicio</label>
+                        <input type="date" id="edit-contrato-fecha-inicio" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-contrato-fecha-fin">Fecha de fin</label>
+                        <input type="date" id="edit-contrato-fecha-fin">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-contrato-importe-mensual">Importe mensual (€)</label>
+                        <input type="number" id="edit-contrato-importe-mensual" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-contrato-fianza">Fianza (€)</label>
+                        <input type="number" id="edit-contrato-fianza" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-contrato-dia-pago">Día de pago</label>
+                        <input type="number" id="edit-contrato-dia-pago" step="1" min="1" max="31">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-contrato-actualizacion">Actualización</label>
+                        <input type="text" id="edit-contrato-actualizacion" placeholder="Ej. IPC anual">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-contrato-importe-actualizado">Importe actualizado (€)</label>
+                    <input type="number" id="edit-contrato-importe-actualizado" step="0.01" min="0">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-contrato-nombre-arrendatario">Nombre del arrendatario</label>
+                        <input type="text" id="edit-contrato-nombre-arrendatario">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-contrato-apellidos-arrendatario">Apellidos del arrendatario</label>
+                        <input type="text" id="edit-contrato-apellidos-arrendatario">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-contrato-telefono-arrendatario">Teléfono del arrendatario</label>
+                        <input type="tel" id="edit-contrato-telefono-arrendatario">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-contrato-email-arrendatario">Email del arrendatario</label>
+                        <input type="email" id="edit-contrato-email-arrendatario">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-contrato-observaciones">Observaciones</label>
+                    <textarea id="edit-contrato-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-contrato-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- PAGOS DE ALQUILER (hijos de Contratos)                -->
+        <!-- ===================================================== -->
+
+        <section id="pagos-view" data-view="pagos" hidden>
+
+            <button id="back-to-ficha-from-pagos-btn" type="button" class="link-button">
+                ← Volver a la ficha
+            </button>
+
+            <h2 id="pagos-title">Pagos</h2>
+
+            <div id="pagos-list"></div>
+
+            <button id="add-pago-btn" type="button" hidden>
+                + Añadir pago
+            </button>
+
+        </section>
+
+        <section id="add-pago-view" data-view="add-pago" hidden>
+
+            <button id="add-pago-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir pago</h2>
+
+            <form id="add-pago-form">
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="pago-fecha-prevista">Fecha prevista</label>
+                        <input type="date" id="pago-fecha-prevista" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="pago-fecha-pago">Fecha de pago</label>
+                        <input type="date" id="pago-fecha-pago">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="pago-importe-previsto">Importe previsto (€)</label>
+                        <input type="number" id="pago-importe-previsto" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="pago-importe-pagado">Importe pagado (€)</label>
+                        <input type="number" id="pago-importe-pagado" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="pago-estado">Estado</label>
+                    <select id="pago-estado" required>
+                        <option value="Pendiente" selected>Pendiente</option>
+                        <option value="Pagado">Pagado</option>
+                        <option value="Parcial">Parcial</option>
+                        <option value="Impagado">Impagado</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="pago-observaciones">Observaciones</label>
+                    <textarea id="pago-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar pago
+                </button>
+
+                <p id="add-pago-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-pago-view" data-view="edit-pago" hidden>
+
+            <button id="edit-pago-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar pago</h2>
+
+            <form id="edit-pago-form">
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-pago-fecha-prevista">Fecha prevista</label>
+                        <input type="date" id="edit-pago-fecha-prevista" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-pago-fecha-pago">Fecha de pago</label>
+                        <input type="date" id="edit-pago-fecha-pago">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-pago-importe-previsto">Importe previsto (€)</label>
+                        <input type="number" id="edit-pago-importe-previsto" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-pago-importe-pagado">Importe pagado (€)</label>
+                        <input type="number" id="edit-pago-importe-pagado" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-pago-estado">Estado</label>
+                    <select id="edit-pago-estado" required>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Pagado">Pagado</option>
+                        <option value="Parcial">Parcial</option>
+                        <option value="Impagado">Impagado</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-pago-observaciones">Observaciones</label>
+                    <textarea id="edit-pago-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-pago-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- PROPIETARIOS                                          -->
+        <!-- ===================================================== -->
+
+        <section id="add-propietario-view" data-view="add-propietario" hidden>
+
+            <button id="add-propietario-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir propietario</h2>
+
+            <form id="add-propietario-form">
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="propietario-nombre">Nombre</label>
+                        <input type="text" id="propietario-nombre" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="propietario-apellidos">Apellidos</label>
+                        <input type="text" id="propietario-apellidos">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="propietario-porcentaje">Porcentaje de propiedad (%)</label>
+                    <input type="number" id="propietario-porcentaje" step="0.01" min="0" max="100">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="propietario-fecha-inicio">Fecha de inicio</label>
+                        <input type="date" id="propietario-fecha-inicio">
+                    </div>
+                    <div class="form-field">
+                        <label for="propietario-fecha-fin">Fecha de fin</label>
+                        <input type="date" id="propietario-fecha-fin">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="propietario-observaciones">Observaciones</label>
+                    <textarea id="propietario-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar propietario
+                </button>
+
+                <p id="add-propietario-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-propietario-view" data-view="edit-propietario" hidden>
+
+            <button id="edit-propietario-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar propietario</h2>
+
+            <form id="edit-propietario-form">
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-propietario-nombre">Nombre</label>
+                        <input type="text" id="edit-propietario-nombre" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-propietario-apellidos">Apellidos</label>
+                        <input type="text" id="edit-propietario-apellidos">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-propietario-porcentaje">Porcentaje de propiedad (%)</label>
+                    <input type="number" id="edit-propietario-porcentaje" step="0.01" min="0" max="100">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-propietario-fecha-inicio">Fecha de inicio</label>
+                        <input type="date" id="edit-propietario-fecha-inicio">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-propietario-fecha-fin">Fecha de fin</label>
+                        <input type="date" id="edit-propietario-fecha-fin">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-propietario-observaciones">Observaciones</label>
+                    <textarea id="edit-propietario-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-propietario-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- GASTOS RECURRENTES                                    -->
+        <!-- ===================================================== -->
+
+        <section id="add-recurrente-view" data-view="add-recurrente" hidden>
+
+            <button id="add-recurrente-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir gasto recurrente</h2>
+
+            <form id="add-recurrente-form">
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="recurrente-tipo">Tipo</label>
+                        <select id="recurrente-tipo" required>
+                            <option value="IBI">IBI</option>
+                            <option value="Comunidad">Comunidad</option>
+                            <option value="Derrama">Derrama</option>
+                            <option value="Reparación">Reparación</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                            <option value="Impuesto">Impuesto</option>
+                            <option value="Suministro">Suministro</option>
+                            <option value="Servicio">Servicio</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="recurrente-periodicidad">Periodicidad</label>
+                        <select id="recurrente-periodicidad" required>
+                            <option value="Mensual">Mensual</option>
+                            <option value="Trimestral">Trimestral</option>
+                            <option value="Semestral">Semestral</option>
+                            <option value="Anual">Anual</option>
+                            <option value="Otra">Otra</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="recurrente-descripcion">Descripción</label>
+                    <input type="text" id="recurrente-descripcion" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="recurrente-fecha-proxima">Próxima fecha</label>
+                        <input type="date" id="recurrente-fecha-proxima" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="recurrente-importe-previsto">Importe previsto (€)</label>
+                        <input type="number" id="recurrente-importe-previsto" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="recurrente-parte">Parte relacionada</label>
+                        <select id="recurrente-parte">
+                            <option value="">Sin parte asociada</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="recurrente-contacto">Contacto relacionado</label>
+                        <select id="recurrente-contacto">
+                            <option value="">Sin contacto asociado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field checkbox-field">
+                    <label for="recurrente-activo">
+                        <input type="checkbox" id="recurrente-activo" checked>
+                        Activo
+                    </label>
+                </div>
+
+                <div class="form-field">
+                    <label for="recurrente-observaciones">Observaciones</label>
+                    <textarea id="recurrente-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar gasto recurrente
+                </button>
+
+                <p id="add-recurrente-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-recurrente-view" data-view="edit-recurrente" hidden>
+
+            <button id="edit-recurrente-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar gasto recurrente</h2>
+
+            <form id="edit-recurrente-form">
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-recurrente-tipo">Tipo</label>
+                        <select id="edit-recurrente-tipo" required>
+                            <option value="IBI">IBI</option>
+                            <option value="Comunidad">Comunidad</option>
+                            <option value="Derrama">Derrama</option>
+                            <option value="Reparación">Reparación</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                            <option value="Impuesto">Impuesto</option>
+                            <option value="Suministro">Suministro</option>
+                            <option value="Servicio">Servicio</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-recurrente-periodicidad">Periodicidad</label>
+                        <select id="edit-recurrente-periodicidad" required>
+                            <option value="Mensual">Mensual</option>
+                            <option value="Trimestral">Trimestral</option>
+                            <option value="Semestral">Semestral</option>
+                            <option value="Anual">Anual</option>
+                            <option value="Otra">Otra</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-recurrente-descripcion">Descripción</label>
+                    <input type="text" id="edit-recurrente-descripcion" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-recurrente-fecha-proxima">Próxima fecha</label>
+                        <input type="date" id="edit-recurrente-fecha-proxima" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-recurrente-importe-previsto">Importe previsto (€)</label>
+                        <input type="number" id="edit-recurrente-importe-previsto" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-recurrente-parte">Parte relacionada</label>
+                        <select id="edit-recurrente-parte">
+                            <option value="">Sin parte asociada</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-recurrente-contacto">Contacto relacionado</label>
+                        <select id="edit-recurrente-contacto">
+                            <option value="">Sin contacto asociado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field checkbox-field">
+                    <label for="edit-recurrente-activo">
+                        <input type="checkbox" id="edit-recurrente-activo">
+                        Activo
+                    </label>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-recurrente-observaciones">Observaciones</label>
+                    <textarea id="edit-recurrente-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-recurrente-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- COMPRAS                                               -->
+        <!-- ===================================================== -->
+
+        <section id="add-compra-view" data-view="add-compra" hidden>
+
+            <button id="add-compra-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir compra</h2>
+
+            <form id="add-compra-form">
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="compra-fecha">Fecha</label>
+                        <input type="date" id="compra-fecha" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="compra-tipo">Tipo</label>
+                        <select id="compra-tipo" required>
+                            <option value="Electrodoméstico">Electrodoméstico</option>
+                            <option value="Mobiliario">Mobiliario</option>
+                            <option value="Electrónica">Electrónica</option>
+                            <option value="Herramienta">Herramienta</option>
+                            <option value="Material">Material</option>
+                            <option value="Equipamiento">Equipamiento</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="compra-descripcion">Descripción</label>
+                    <input type="text" id="compra-descripcion" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="compra-importe">Importe (€)</label>
+                        <input type="number" id="compra-importe" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="compra-parte">Parte relacionada</label>
+                        <select id="compra-parte">
+                            <option value="">Sin parte asociada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="compra-contacto">Contacto relacionado</label>
+                    <select id="compra-contacto">
+                        <option value="">Sin contacto asociado</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="compra-observaciones">Observaciones</label>
+                    <textarea id="compra-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar compra
+                </button>
+
+                <p id="add-compra-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-compra-view" data-view="edit-compra" hidden>
+
+            <button id="edit-compra-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar compra</h2>
+
+            <form id="edit-compra-form">
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-compra-fecha">Fecha</label>
+                        <input type="date" id="edit-compra-fecha" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-compra-tipo">Tipo</label>
+                        <select id="edit-compra-tipo" required>
+                            <option value="Electrodoméstico">Electrodoméstico</option>
+                            <option value="Mobiliario">Mobiliario</option>
+                            <option value="Electrónica">Electrónica</option>
+                            <option value="Herramienta">Herramienta</option>
+                            <option value="Material">Material</option>
+                            <option value="Equipamiento">Equipamiento</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-compra-descripcion">Descripción</label>
+                    <input type="text" id="edit-compra-descripcion" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-compra-importe">Importe (€)</label>
+                        <input type="number" id="edit-compra-importe" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-compra-parte">Parte relacionada</label>
+                        <select id="edit-compra-parte">
+                            <option value="">Sin parte asociada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-compra-contacto">Contacto relacionado</label>
+                    <select id="edit-compra-contacto">
+                        <option value="">Sin contacto asociado</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-compra-observaciones">Observaciones</label>
+                    <textarea id="edit-compra-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-compra-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- CONTACTOS (nivel usuario)                             -->
+        <!-- ===================================================== -->
+
+        <section id="contactos-view" data-view="contactos" hidden>
+
+            <button id="back-to-properties-from-contactos-btn" type="button" class="link-button">
+                ← Volver a Mis inmuebles
+            </button>
+
+            <h2>Contactos</h2>
+
+            <div id="contactos-list"></div>
+
+            <button id="add-contacto-btn" type="button">
+                + Añadir contacto
+            </button>
+
+        </section>
+
+        <section id="add-contacto-view" data-view="add-contacto" hidden>
+
+            <button id="add-contacto-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir contacto</h2>
+
+            <form id="add-contacto-form">
+
+                <div class="form-field">
+                    <label for="contacto-nombre">Nombre</label>
+                    <input type="text" id="contacto-nombre" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="contacto-tipo">Tipo</label>
+                    <select id="contacto-tipo" required>
+                        <option value="Profesional">Profesional</option>
+                        <option value="Empresa">Empresa</option>
+                        <option value="Organismo">Organismo</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="contacto-persona-contacto">Persona de contacto</label>
+                    <input type="text" id="contacto-persona-contacto">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="contacto-telefono">Teléfono</label>
+                        <input type="tel" id="contacto-telefono">
+                    </div>
+                    <div class="form-field">
+                        <label for="contacto-email">Email</label>
+                        <input type="email" id="contacto-email">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="contacto-web">Web</label>
+                    <input type="text" id="contacto-web">
+                </div>
+
+                <div class="form-field">
+                    <label for="contacto-direccion">Dirección</label>
+                    <input type="text" id="contacto-direccion">
+                </div>
+
+                <div class="form-field">
+                    <label for="contacto-observaciones">Observaciones</label>
+                    <textarea id="contacto-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar contacto
+                </button>
+
+                <p id="add-contacto-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-contacto-view" data-view="edit-contacto" hidden>
+
+            <button id="edit-contacto-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar contacto</h2>
+
+            <form id="edit-contacto-form">
+
+                <div class="form-field">
+                    <label for="edit-contacto-nombre">Nombre</label>
+                    <input type="text" id="edit-contacto-nombre" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-contacto-tipo">Tipo</label>
+                    <select id="edit-contacto-tipo" required>
+                        <option value="Profesional">Profesional</option>
+                        <option value="Empresa">Empresa</option>
+                        <option value="Organismo">Organismo</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-contacto-persona-contacto">Persona de contacto</label>
+                    <input type="text" id="edit-contacto-persona-contacto">
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-contacto-telefono">Teléfono</label>
+                        <input type="tel" id="edit-contacto-telefono">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-contacto-email">Email</label>
+                        <input type="email" id="edit-contacto-email">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-contacto-web">Web</label>
+                    <input type="text" id="edit-contacto-web">
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-contacto-direccion">Dirección</label>
+                    <input type="text" id="edit-contacto-direccion">
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-contacto-observaciones">Observaciones</label>
+                    <textarea id="edit-contacto-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-contacto-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- ALERTAS (nivel usuario)                               -->
+        <!-- ===================================================== -->
+
+        <section id="alertas-view" data-view="alertas" hidden>
+
+            <button id="back-to-properties-from-alertas-btn" type="button" class="link-button">
+                ← Volver a Mis inmuebles
+            </button>
+
+            <h2>Alertas</h2>
+
+            <div id="alertas-list"></div>
+
+            <button id="add-alerta-btn" type="button">
+                + Añadir alerta
+            </button>
+
+        </section>
+
+        <section id="add-alerta-view" data-view="add-alerta" hidden>
+
+            <button id="add-alerta-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Añadir alerta</h2>
+
+            <form id="add-alerta-form">
+
+                <div class="form-field">
+                    <label for="alerta-titulo">Título</label>
+                    <input type="text" id="alerta-titulo" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="alerta-fecha-alerta">Fecha</label>
+                        <input type="date" id="alerta-fecha-alerta" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="alerta-estado">Estado</label>
+                        <select id="alerta-estado" required>
+                            <option value="Pendiente" selected>Pendiente</option>
+                            <option value="Realizada">Realizada</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="alerta-tipo">Tipo</label>
+                        <input type="text" id="alerta-tipo" placeholder="Ej. Renovación de seguro">
+                    </div>
+                    <div class="form-field">
+                        <label for="alerta-inmueble">Inmueble relacionado</label>
+                        <select id="alerta-inmueble">
+                            <option value="">Sin inmueble asociado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="alerta-descripcion">Descripción</label>
+                    <textarea id="alerta-descripcion" rows="3"></textarea>
+                </div>
+
+                <div class="form-field">
+                    <label for="alerta-observaciones">Observaciones</label>
+                    <textarea id="alerta-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar alerta
+                </button>
+
+                <p id="add-alerta-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+        <section id="edit-alerta-view" data-view="edit-alerta" hidden>
+
+            <button id="edit-alerta-cancel-btn" type="button" class="link-button">
+                ← Cancelar
+            </button>
+
+            <h2>Editar alerta</h2>
+
+            <form id="edit-alerta-form">
+
+                <div class="form-field">
+                    <label for="edit-alerta-titulo">Título</label>
+                    <input type="text" id="edit-alerta-titulo" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-alerta-fecha-alerta">Fecha</label>
+                        <input type="date" id="edit-alerta-fecha-alerta" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-alerta-estado">Estado</label>
+                        <select id="edit-alerta-estado" required>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Realizada">Realizada</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="form-field">
+                        <label for="edit-alerta-tipo">Tipo</label>
+                        <input type="text" id="edit-alerta-tipo" placeholder="Ej. Renovación de seguro">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit-alerta-inmueble">Inmueble relacionado</label>
+                        <select id="edit-alerta-inmueble">
+                            <option value="">Sin inmueble asociado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-alerta-descripcion">Descripción</label>
+                    <textarea id="edit-alerta-descripcion" rows="3"></textarea>
+                </div>
+
+                <div class="form-field">
+                    <label for="edit-alerta-observaciones">Observaciones</label>
+                    <textarea id="edit-alerta-observaciones" rows="3"></textarea>
+                </div>
+
+                <button type="submit">
+                    Guardar cambios
+                </button>
+
+                <p id="edit-alerta-message" class="form-message"></p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+
+</body>
+</html>

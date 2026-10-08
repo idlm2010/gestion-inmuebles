@@ -1,0 +1,194 @@
+:root {
+    --color-bg: #F6F2EA;
+    --color-paper: #FFFFFF;
+    --color-ink: #2B2620;
+    --color-ink-soft: #6B6255;
+    --color-accent: #1F4B43;
+    --color-accent-soft: #E4ECE9;
+    --color-gold: #B4813C;
+    --color-danger: #8B3A3A;
+    --color-border: #DED7C8;
+    --font-serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+}
+
+main {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 48px 20px 80px;
+}
+
+h1 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin: 0 0 32px;
+    color: var(--color-ink);
+}
+
+h2 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 20px;
+    color: var(--color-ink);
+}
+
+.section-heading {
+    margin-top: 36px !important;
+}
+
+/* FORMULARIOS */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-row {
+    display: flex;
+    gap: 12px;
+}
+
+.field-row .form-field {
+    flex: 1;
+    min-width: 0;
+}
+
+label {
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+}
+
+input,
+select,
+textarea {
+    font: inherit;
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: var(--color-paper);
+    color: var(--color-ink);
+}
+
+textarea {
+    resize: vertical;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+form button[type="submit"] {
+    margin-top: 8px;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 4px;
+    background: var(--color-accent);
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+form button[type="submit"]:hover {
+    background: #163A34;
+}
+
+.form-message {
+    min-height: 1.2em;
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    margin: 0;
+}
+
+/* NAVEGACIÓN Y COMPONENTES REUTILIZABLES */
+
+.link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 24px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--color-ink-soft);
+    font-size: 0.9rem;
+}
+
+.link-button:hover {
+    color: var(--color-accent);
+}
+
+.empty-message {
+    color: var(--color-ink-soft);
+    font-size: 0.95rem;
+}
+
+.row-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 4px;
+}
+
+.row-actions button {
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-size: 0.82rem;
+    color: var(--color-ink-soft);
+    text-decoration: underline;
+}
+
+.row-actions button:hover {
+    color: var(--color-accent);
+}
+
+.row-actions .delete-btn:hover {
+    color: var(--color-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+.checkbox-field label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: var(--color-ink);
+}
+
+.checkbox-field input[type="checkbox"] {
+    width: auto;
+}

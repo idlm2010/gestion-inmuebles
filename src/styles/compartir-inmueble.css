@@ -1,0 +1,63 @@
+#colaboradores-list,
+#invitaciones-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 4px 0 24px;
+}
+
+.colaborador-row,
+.invitacion-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 14px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+}
+
+.colaborador-header,
+.invitacion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.colaborador-identidad,
+.invitacion-email {
+    font-weight: 600;
+    color: var(--color-ink);
+}
+
+.colaborador-rol-permiso,
+.invitacion-rol-permiso {
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+}
+
+.colaborador-meta {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--color-ink-soft);
+    font-style: italic;
+}
+
+#compartir-btn {
+    display: block;
+    width: 100%;
+    padding: 11px 16px;
+    margin-top: 10px;
+    border: 1px dashed var(--color-border);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+#compartir-btn:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+}
