@@ -21,5 +21,33 @@ import "./views/alertas.js";
 import "./views/compartir-inmueble.js";
 
 import { mostrarVista } from "./state.js";
+import { esperarSesionInicial } from "./services/auth.js";
+import { obtenerMisInmuebles } from "./services/inmuebles.js";
+import { mostrarConInmuebles } from "./views/propiedades.js";
 
-mostrarVista("login");
+async function arrancar() {
+
+    // Mientras Firebase recupera la sesión no se muestra ninguna pantalla,
+    // para que no parpadee el login antes de entrar en "Mis inmuebles".
+    mostrarVista("");
+
+    try {
+
+        const user = await esperarSesionInicial();
+
+        if (!user) {
+            mostrarVista("login");
+            return;
+        }
+
+        const misInmuebles = await obtenerMisInmuebles(user.uid);
+        mostrarConInmuebles(misInmuebles);
+
+    } catch (error) {
+
+        console.error("Error al restaurar la sesión:", error);
+        mostrarVista("login");
+    }
+}
+
+arrancar();

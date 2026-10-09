@@ -27,7 +27,7 @@ let colaboradoresActuales = [];
 
 
 function construirMensajeInvitacion(email, inmuebleNombre) {
-    const url = window.location.origin;
+    const url = window.location.origin + import.meta.env.BASE_URL;
     return `Te he invitado a "${inmuebleNombre}" en Gestión de Inmuebles.\n\n`
         + `Entra en ${url} con el email ${email}.\n`
         + `Si todavía no tienes cuenta, pulsa "¿No tienes cuenta? Crear una" y regístrate con ese mismo email. `
