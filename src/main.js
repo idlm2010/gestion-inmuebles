@@ -2,6 +2,7 @@ import "./styles/base.css";
 
 import "./views/login.js";
 import "./views/registro.js";
+import "./views/recuperar-contrasena.js";
 import "./views/propiedades.js";
 import "./views/ficha-inmueble.js";
 import "./views/partes.js";

@@ -2,7 +2,8 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    sendPasswordResetEmail
 } from "firebase/auth";
 
 import { auth } from "../firebase.js";
@@ -34,4 +35,25 @@ export function esperarSesionInicial() {
             resolve(user);
         });
     });
+}
+// Envía el correo para elegir una contraseña nueva. El correo llega en español.
+// Si el dominio de la app no está autorizado en Firebase, el correo se envía
+// igualmente, solo que sin el enlace final para volver a la aplicación.
+export async function enviarRecuperacionContrasena(email) {
+
+    auth.languageCode = "es";
+
+    const urlDeVuelta = window.location.origin + import.meta.env.BASE_URL;
+
+    try {
+        await sendPasswordResetEmail(auth, email, { url: urlDeVuelta });
+    } catch (error) {
+
+        if (error.code === "auth/unauthorized-continue-uri") {
+            await sendPasswordResetEmail(auth, email);
+            return;
+        }
+
+        throw error;
+    }
 }
