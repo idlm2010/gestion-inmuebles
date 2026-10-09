@@ -10,7 +10,7 @@ import {
     writeBatch
 } from "firebase/firestore";
 
-import { db } from "../firebase.js";
+import { auth, db } from "../firebase.js";
 
 export async function obtenerMisInmuebles(uid) {
 
@@ -59,6 +59,7 @@ export async function crearInmueble(uid, datosInmueble) {
 
     batch.set(usuarioRef, {
         usuario_id: uid,
+        email: auth.currentUser?.email?.trim().toLowerCase() ?? null,
         rol: "Propietario",
         permiso: "Edición",
         observaciones: ""

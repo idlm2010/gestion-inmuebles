@@ -101,6 +101,7 @@ export async function reclamarInvitaciones(user) {
             try {
                 await setDoc(usuarioRef, {
                     usuario_id: user.uid,
+                    email: emailLower,
                     rol: datos.rol,
                     permiso: datos.permiso,
                     observaciones: ""

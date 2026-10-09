@@ -47,7 +47,12 @@ function crearFilaColaborador(colaborador) {
 
     const identidad = document.createElement("span");
     identidad.className = "colaborador-identidad";
-    identidad.textContent = esYo ? "Tú" : `Usuario ${colaborador.id.slice(0, 8)}…`;
+    if (esYo) {
+        const miEmail = usuarioActual()?.email;
+        identidad.textContent = miEmail ? `Tú (${miEmail})` : "Tú";
+    } else {
+        identidad.textContent = colaborador.email ?? `Usuario ${colaborador.id.slice(0, 8)}…`;
+    }
 
     const rolPermiso = document.createElement("span");
     rolPermiso.className = "colaborador-rol-permiso";
